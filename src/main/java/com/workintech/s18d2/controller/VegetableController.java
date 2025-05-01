@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -22,11 +23,19 @@ import org.springframework.web.bind.annotation.*;
 public class VegetableController {
     private final VegetableService vegetableService;
 
+    @GetMapping("/desc")
+    public List<Vegetable> getAllDesc() {
+        return vegetableService.getByPriceDesc();
+    }
     @GetMapping("/{id}")
     public VegetableResponse get(@Positive( message = "id sıfırdan küçük olamaz") @PathVariable("id") Long id) {
         return new VegetableResponse( "get it succeed!", vegetableService.getByID(id));
     }
 
+    @GetMapping("/search/{name}")
+    public List<Vegetable> searchByName(@PathVariable("name") String name) {
+        return vegetableService.searchByName(name);
+    }
 
     @PostMapping
     public Vegetable save(@Validated @RequestBody Vegetable vegetable){

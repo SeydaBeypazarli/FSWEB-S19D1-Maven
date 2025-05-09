@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -137,7 +136,7 @@ class MainTest {
     @Test
     @DisplayName("FruitRepository::searchByName should return fruits with matching name")
     void testSearchByName() {
-        List<Fruit> fruits = fruitRepository.searchByName("Apple");
+        List<Fruit> fruits = fruitRepository.findByName("Apple");
         assertEquals(1, fruits.size());
         assertEquals("Apple", fruits.get(0).getName());
     }
@@ -198,7 +197,7 @@ class MainTest {
     @Test
     @DisplayName("FruitService::searchByName() should return fruits with the given name")
     void testSearchByNameFruitService() {
-        when(mockFruitRepository.searchByName(anyString())).thenReturn(Arrays.asList(sampleFruitForFruitServiceTest));
+        when(mockFruitRepository.findByName(anyString())).thenReturn(Arrays.asList(sampleFruitForFruitServiceTest));
 
         List<Fruit> fruits = fruitService.searchByName("Apple");
 

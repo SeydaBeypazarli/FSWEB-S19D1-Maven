@@ -43,6 +43,6 @@ public class FruitServiceImpl implements FruitService{
 
     @Override
     public List<Fruit> searchByName(String name) {
-        return fruitRepository.searchByName(name);
+        return fruitRepository.findByName(name);
     }
 }
